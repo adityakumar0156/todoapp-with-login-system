@@ -1,0 +1,89 @@
+{%extends "base.html"%}
+{%block title%}Home-ToDo{%endblock%}
+{%block content%}
+<div class="alert alert-primary" role="alert">
+ Cookies-Data(name)-->{{c}}
+</div>
+
+<div class="alert alert-success" role="alert">
+ Session-Data(name)-->{{s}}
+</div>
+
+
+<a href="/add_sessions" type="button" class="btn btn-success">Add Session</a>
+<a href="/delete_sessions" type="button" class="btn btn-success">Delete Session</a>
+
+
+<a href="/welcome" type="button" class="btn btn-danger">Add cookie</a>
+<a href="/dcookie" type="button" class="btn btn-danger">Delete cookie</a>
+
+
+
+<form style="width:60%;margin-bottom:50px;margin-top:20px;" action="/go" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter Title" name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Content</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Content" name="password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+<!--Table-->
+{% if data|length==0 %}
+<div class="alert alert-success" role="alert">
+  No records...!!
+</div>
+{% endif %}
+
+{% if data|length!=0 %}
+<table class="table" style="margin-top: 50px;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">sno</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+      <th scope="col">Operation</th>
+    </tr>
+  </thead>
+
+  {% for i in range(0,data|length) %}  <!--Main Loop for printing data-->
+
+  {% if i>=ss and i<t %}
+
+   <tbody>
+    <tr>
+
+      <th scope="row">{{loop.index}}</th>
+      <td>{{data[i].email}}</td>
+      <td>{{data[i].password}}
+      </td>
+      <td><a href="/update/{{data[i].sno}}/{{ss}}/{{t}}" type="button" class="btn btn-danger">Update</a>
+        <a href="/delete/{{data[i].sno}}/{{ss}}/{{t}}" type="button" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+
+    </tbody>
+
+    {% endif %}
+    {% endfor %}
+
+</table>
+{% endif %}
+
+
+{% if (ss+5)< data|length %}
+
+<a href="/page/{{ss}}/{{t}}/1" type="button" class="btn btn-success " >Next</a>
+{% endif %}
+
+{% if t>5  %}
+<a  href="/page/{{ss}}/{{t}}/0" type="button" class="btn btn-success">Back</a>
+
+{% endif %}
+
+{%endblock%}

@@ -1,0 +1,21 @@
+{%extends "base.html"%}
+{%block title%}Welcome-ToDo{%endblock%}
+{%block content%}
+
+<form style="width:60%;margin-bottom:50px;margin-top:20px;" action="/add_sessions" method="post">
+
+<div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div>@Set <br>Sessions<span></span></div>
+		</div>
+		<br>
+		<div class="login">
+	<input type="text" placeholder="type" name="type" class="my-1 mx-3" required><br>
+
+				<input type="text" placeholder="session-name" name="session" class="my-1 mx-3" required><br>
+              <button type="submit" class="btn btn-success my-3 mx-3">Set Session</button>
+		</div>
+
+</form>
+{%endblock%}
